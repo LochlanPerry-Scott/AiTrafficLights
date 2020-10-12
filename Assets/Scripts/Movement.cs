@@ -7,13 +7,14 @@ public class Movement : MonoBehaviour
     public float speed = 10f;
     GameObject stopper;
 
-    private void Start()
-    {
-        if(stopper = null)
-        {
-            stopper = GameObject.FindGameObjectWithTag("Counter");
-        }
-    }
+    [SerializeField] private bool stopCar = true;
+    //private void Start()
+    //{
+    //    if(stopper = null)
+    //    {
+    //        stopper = GameObject.FindGameObjectWithTag("Counter");
+    //    }
+    //}
 
     private void Update()
     {
@@ -22,11 +23,17 @@ public class Movement : MonoBehaviour
 
     void move()
     {
-        if(stopper.GetComponent<Counter>().horizontalCount >= stopper.GetComponent<Counter>().verticalCount)
-        {
+        //if(stopper.GetComponent<Counter>().horizontalCount >= stopper.GetComponent<Counter>().verticalCount)
+        //{
             
-        }
+        //}
         
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        if(!stopCar)
+            transform.Translate(transform.forward * speed * Time.deltaTime);
+    }
+
+    public void TriggerStopCar(bool value)
+    {
+        stopCar = value;
     }
 }

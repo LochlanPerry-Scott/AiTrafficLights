@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour
 {
+    public static Spawner instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public GameObject[] cars;
     public Transform[] spawnPoints;
     int index;
@@ -11,6 +18,9 @@ public class Spawner : MonoBehaviour
     GameObject car;
     Transform spawn;
     public float spawnrate;
+
+    public List<CarDetection> VerticalCars;
+    public List<CarDetection> HorizontalCars;
 
     private void Start()
     {
@@ -25,7 +35,30 @@ public class Spawner : MonoBehaviour
         index2 = UnityEngine.Random.Range(0, spawnPoints.Length);
         spawn = spawnPoints[index2];
 
-        Instantiate(car, spawn);
-        Debug.Log("The car is " + car + "The Spawn is" + spawn.position);
+        GameObject carSpawn = Instantiate(car, spawn.position, spawn.rotation, null);
+        CarDetection carScript = carSpawn.GetComponent<CarDetection>();
+
+
+        if(index2 == 0 || index2 == 2)
+        {
+            Debug.Log("Vertical");
+            VerticalCars.Add(carScript);
+            return;
+        }
+
+        if (index2 == 1 || index2 == 2)
+        {
+            Debug.Log("Horizontal");
+            HorizontalCars.Add(carScript);
+            return;
+        }
+
+        //carScript.TriggerStopCar(false);
+        //Debug.Log("The car is " + car + "The Spawn is" + spawn.position);
+    }
+
+    private void SetLane()
+    {
+
     }
 }

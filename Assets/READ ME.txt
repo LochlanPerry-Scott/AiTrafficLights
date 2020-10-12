@@ -1,0 +1,12 @@
+What to do from here?
+
+From here I have set up triggers as the lights, 
+these get called to by the cars raycast and calls a script that changes the lights.
+> Car Reaches Lights
+> Raycast causes car to slow down and trigger to be called.
+> lights change
+> Cars drive dependant on direction...
+
+from here you need to...
+
+> Car Detection may need to be adjusted, currently some cars crash through red lights.
